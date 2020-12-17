@@ -6,7 +6,8 @@ const SPECIAL_CONVERTIONS = {
 }
 
 const isChar = char => Boolean(char.match(/[a-z]/i))
-const emojify = (text = '') => text.toLowerCase().split('').map(char => {
+
+const convertWord = word => word.toLowerCase().split('').map(char => {
   const maybeSpecialConvertedChar = SPECIAL_CONVERTIONS[char]
   if (maybeSpecialConvertedChar) {
     return maybeSpecialConvertedChar
@@ -18,5 +19,17 @@ const emojify = (text = '') => text.toLowerCase().split('').map(char => {
 
   return `:alphabet-white-${char}:`
 }).join('')
+
+const emojify = (text = '') => {
+  const words = text.split(' ')
+
+  return words.map(word => {
+    if (/:.*?:/gm.test(word)) {
+      return word
+    }
+
+    return convertWord(word)
+  }).join(' ')
+}
 
 module.exports = emojify
