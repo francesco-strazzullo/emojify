@@ -1,20 +1,12 @@
 const ApiBuilder = require('claudia-api-builder')
 const api = new ApiBuilder()
 const querystring = require('querystring')
+const emojify = require('./emojify')
 
 const getText = body => {
   const query = querystring.parse(body)
   return query.text
 }
-
-const isChar = char => Boolean(char.match(/[a-z]/i))
-const emojify = (text = '') => text.toLowerCase().split('').map(char => {
-  if (!isChar(char)) {
-    return char
-  }
-
-  return `:alphabet-white-${char}:`
-}).join('')
 
 api.get('/', async (request) => {
   return emojify(request.queryString.text)
