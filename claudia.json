@@ -1,0 +1,11 @@
+{
+  "lambda": {
+    "role": "emojifier-executor",
+    "name": "emojifier",
+    "region": "eu-central-1"
+  },
+  "api": {
+    "id": "nlyc5sc2ri",
+    "module": "app"
+  }
+}
